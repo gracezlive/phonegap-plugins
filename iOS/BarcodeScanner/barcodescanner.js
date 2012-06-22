@@ -6,11 +6,6 @@
  * Copyright (c) 2010, IBM Corporation
  */
 
-;(function(){
-
-if (Cordova.hasResource("barcodeScanner")) return
-
-Cordova.addResource("barcodeScanner")
 
 //-------------------------------------------------------------------
 var BarcodeScanner = function() {
@@ -48,7 +43,7 @@ BarcodeScanner.prototype.scan = function(success, fail, options) {
     if ( null == options ) 
       options = []
 
-    return Cordova.exec(successWrapper, fail, "org.apache.cordova.barcodeScanner", "scan", options)
+    return cordova.exec(successWrapper, fail, "org.apache.cordova.barcodeScanner", "scan", options)
 }
 
 //-------------------------------------------------------------------
@@ -65,11 +60,11 @@ BarcodeScanner.prototype.encode = function(type, data, success, fail, options) {
         return
     }
 
-    return Cordova.exec(success, fail, "org.apache.cordova.barcodeScanner", "encode", [{type: type, data: data, options: options}])
+    return cordova.exec(success, fail, "org.apache.cordova.barcodeScanner", "encode", [{type: type, data: data, options: options}])
 }
 
 //-------------------------------------------------------------------
-Cordova.addConstructor(function() {
+
     if (!window.plugins) window.plugins = {}
 
     if (!window.plugins.barcodeScanner) {
@@ -78,6 +73,3 @@ Cordova.addConstructor(function() {
     else {
         console.log("Not installing barcodeScanner: window.plugins.barcodeScanner already exists")
     }
-})
-
-})();
